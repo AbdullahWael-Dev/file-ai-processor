@@ -1,66 +1,183 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📄 Laravel File AI Processor
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Upload a PDF, DOCX, or TXT file — get back an AI-processed summary or formatted result, ready to download as PDF or Word.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 🔐 **Google OAuth login** via Laravel Socialite — no passwords
+- 📁 **Upload PDF, DOCX, or TXT** files
+- 🤖 **AI processing** via OpenRouter (GPT-4, Claude, Mistral, and more)
+- 📥 **Export results** as PDF (mPDF / DomPDF) or Word (PhpWord)
+- 🎨 **Responsive UI** built with Bootstrap 5
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠 Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Layer | Technology |
+|---|---|
+| Backend | Laravel 11 |
+| Authentication | Laravel Socialite (Google OAuth) |
+| AI Integration | OpenRouter API |
+| PDF Export | mPDF + Barryvdh DomPDF |
+| Word Export | PhpWord |
+| PDF Parsing | PdfParser + PdfToText |
+| Frontend | Bootstrap 5 |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## ⚙️ Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- PHP 8.2+
+- Composer 2.x
+- MySQL / PostgreSQL / SQLite
+- Node.js 18+ & npm
+- Google Cloud project with OAuth 2.0 credentials
+- OpenRouter API key
+- `poppler-utils` installed on the server (for PdfToText)
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 🚀 Installation
 
-## Contributing
+```bash
+# 1. Clone the repo
+git clone https://github.com/AbdullahWael-Dev/laravel-file-ai-processor.git
+cd laravel-file-ai-processor
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 2. Install PHP dependencies
+composer install
 
-## Code of Conduct
+# 3. Install JS dependencies & build assets
+npm install && npm run build
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 4. Set up environment
+cp .env.example .env
+php artisan key:generate
 
-## Security Vulnerabilities
+# 5. Run migrations
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 6. Link storage
+php artisan storage:link
 
-## License
+# 7. Start the dev server
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Visit `http://localhost:8000`
+
+---
+
+## 🔑 Environment Variables
+
+Copy `.env.example` to `.env` and fill in the following:
+
+```env
+# App
+APP_NAME=FileAIProcessor
+APP_URL=http://localhost:8000
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=file_ai
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
+
+# OpenRouter AI
+OPENROUTER_API_KEY=sk-or-xxxx
+OPENROUTER_MODEL=openai/gpt-4o
+
+# Upload limit (MB)
+MAX_UPLOAD_MB=20
+```
+
+---
+
+## 🔐 Google OAuth Setup
+
+1. Go to [console.cloud.google.com](https://console.cloud.google.com) and create a project.
+2. Navigate to **APIs & Services → Credentials → Create Credentials → OAuth 2.0 Client ID**.
+3. Set the Authorized redirect URI to:
+   ```
+   https://your-domain.com/auth/google/callback
+   ```
+4. Copy the **Client ID** and **Client Secret** into your `.env`.
+5. Enable the **Google People API** from the API Library.
+
+---
+
+## 🤖 OpenRouter Setup
+
+1. Sign up at [openrouter.ai](https://openrouter.ai) and generate an API key.
+2. Set `OPENROUTER_API_KEY` in your `.env`.
+3. Set `OPENROUTER_MODEL` to your preferred model, for example:
+
+| Model | Notes |
+|---|---|
+| `openai/gpt-4o` | Best quality |
+| `anthropic/claude-3-haiku` | Fast & affordable |
+| `mistralai/mistral-7b-instruct` | Open-source option |
+
+---
+
+## 🔄 How It Works
+
+```
+User logs in via Google
+        ↓
+Uploads a PDF / DOCX / TXT file
+        ↓
+Text is extracted (PdfParser / PhpWord / plain read)
+        ↓
+Text is sent to OpenRouter AI with a system prompt
+        ↓
+AI response is displayed for preview
+        ↓
+User downloads the result as PDF or Word
+```
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+├── Http/Controllers/
+│   ├── Auth/GoogleController.php     # OAuth callback
+│   ├── FileController.php            # Upload & processing
+│   └── ExportController.php          # PDF / Word export
+├── Services/
+│   ├── TextExtractorService.php      # Routes to correct parser
+│   ├── OpenRouterService.php         # API calls to OpenRouter
+│   ├── PdfExportService.php          # mPDF / DomPDF wrappers
+│   └── WordExportService.php         # PhpWord wrapper
+resources/views/
+├── layouts/app.blade.php
+├── files/upload.blade.php
+└── files/result.blade.php
+routes/web.php                        # All application routes
+```
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change. Make sure to follow PSR-12 coding standards.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
